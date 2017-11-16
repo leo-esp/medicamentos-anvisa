@@ -53,16 +53,18 @@ var fs = require('fs');
 var xlstojson = require("xls-to-json-lc");
 var file = require('./file.xls');
 try {
-    xlstojson({
-        input: 'file.xls',
-        output: 'output.js', //since we don't need output.json
-        lowerCaseHeaders:true
-    }, function(err,result){
-        if(err) {
-            console.log(1, err);
-        } 
-        console.log(2, result);
-    });
+    var cv2json = require("convert-json");
+    var _ = require("lodash");
+    
+   var csv_trans = cv2json.xls('./porra.xls', {} /* optional */, function(err, result) {
+     if(err)
+       console.error(err);
+     else{
+         console.log(_.keys(result));
+         console.log(result.Sheets.dados.);
+     }
+
+   })
 } catch (e){
     console.log(3, e);
 }
